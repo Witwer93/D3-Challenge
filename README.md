@@ -3,7 +3,7 @@
 
 Here is my finished product:
 
-![Struggled with circle labels for a long time, finally gottem](Screenshots/final_d3_graph.png)
+![final graph](Screenshots/final_d3_graph.png)
 
 Greatest challenge was getting correct placement for axis labels and circle labels.
 Interesting how selectAll(null) works to catch the text entries that have yet to be filled.
