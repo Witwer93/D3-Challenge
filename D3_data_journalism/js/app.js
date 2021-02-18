@@ -29,15 +29,16 @@ d3.csv("../data/data.csv").then(function(data) {
 
     //create scale functions
     var xScale = d3.scaleLinear()
-        .domain([8, d3.max(data, d => d.poverty)])
+        .domain([8, d3.max(data, d => d.poverty) + 2])
         .range([0, width]);        
 
     var yScale = d3.scaleLinear()
-      .domain([4, d3.max(data, d => d.healthcare) + 4])
+      .domain([4, d3.max(data, d => d.healthcare) + 3])
       .range([height, 0]);
 
     //create axis functions
-    var bottomAxis = d3.axisBottom(xScale);
+    var bottomAxis = d3.axisBottom(xScale)
+      .tickFormat(d3.format("d"));
     var leftAxis = d3.axisLeft(yScale);
 
     //append axes to the chart
@@ -50,15 +51,14 @@ d3.csv("../data/data.csv").then(function(data) {
 
 
     //create circles
-    svg.append('g')
-    .selectAll("dot")
+    var circles = chartGroup.selectAll("circle")
     .data(data)
     .enter()
     .append("circle")
       .attr("cx", d => xScale(d.poverty))
       .attr("cy", d => yScale(d.healthcare))
       .attr("r", 10)
-      .style("fill", "blue")
+      .style("fill", "steelblue")
       .attr("opacity", "0.5");
 
     var labels = chartGroup.selectAll("null").data(data).enter().append("text");
@@ -76,7 +76,7 @@ d3.csv("../data/data.csv").then(function(data) {
       .attr("font-family", "Garamond")
       .attr("font-size", "10px")
       .attr("text-anchor", "middle")
-      .attr("fill", "red");
+      .attr("fill", "white");
 
     //create axes labels
     chartGroup.append("text")
